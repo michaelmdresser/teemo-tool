@@ -11,3 +11,7 @@ pom.xml.asc
 /.prepl-port
 .hgignore
 .hg/
+/resources/auth.txt
+/resources/username.txt
+/resources/token.txt
+/db/*
