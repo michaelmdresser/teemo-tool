@@ -25,25 +25,18 @@
                                              [:timestamp :datetime :default :current_timestamp]]
                                             {:conditional? true})))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "creating database table")
-  (create-db-table)
-  (println "starting irc connection")
-  (irc/join connection "#saltyteemo")
-  )
-
-
 (defn get-line
   [filename]
   (with-open [rdr (io/reader filename)]
     (first (line-seq rdr))))
 
+; the twitch username for the associated token
 (defn get-username
   []
   (get-line "resources/username.txt"))
 
+; a twitch oauth token for the associated username
+; needs appropriate scopes for the twitch IRC API
 (defn get-token
   []
   (get-line "resources/token.txt"))
@@ -81,7 +74,9 @@
   (def bet-message (message-from-type type))
   (let [team (get (re-find team-reg bet-message) 1)
         bet-amount (get (re-find bet-reg bet-message) 1)]
-      {:team (clojure.string/lower-case team) :amount bet-amount :bettor (bettor-from-bet-message bet-message)}))
+    {:team (clojure.string/lower-case team)
+     :amount bet-amount
+     :bettor (bettor-from-bet-message bet-message)}))
 
 (defn insert-bet-map-to-db
   [db bet-map]
@@ -90,20 +85,23 @@
 (defn privmsg-callback
   [irc type & s]
   (if (author-is-official-bot? (author-from-type type))
-    (do
-  (prn "type" type)
     (let [message (message-from-type type)]
-      (prn "message" message)
       (if (bet-message? message)
-        (insert-bet-map-to-db db (map-from-bet type)))))))
-
+        (insert-bet-map-to-db db (map-from-bet type))))))
 
 (def connection (irc/connect "irc.chat.twitch.tv" 6667 (get-username)
                              :pass (get-token)
                              :username (get-username)
-                             :callbacks {
-                                         :privmsg privmsg-callback
-                                         }))
+                             :callbacks {:privmsg privmsg-callback}))
+
+(defn -main
+  [& args]
+  (println "creating database table")
+  (create-db-table)
+  (println "starting irc connection")
+  (irc/join connection "#saltyteemo")
+  )
+
 
 (comment 
 (irclj.events/fire connection :privmsg test-bet-blue)
