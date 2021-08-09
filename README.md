@@ -6,7 +6,7 @@ Teemo Tool is a project intended to help bettors on the [Salty Teemo](https://ww
 
 - Twitch IRC Bot: This repository! Connects to the Salty Teemo stream chat to record bets in a SQLite database. More details below.
 - [API Server](https://github.com/michaelmdresser/teemo-tool-api): Reads from the IRC bot's database. Exposes a simplistic REST API that queries the database for bets on the current match.
-- [Website](https://github.com/michaelmdresser/teemo-tool-site): Visualizes data exposed by the API server. Accessible live [here](https://teemotool.com).
+- [Website](https://github.com/michaelmdresser/teemo-tool-site): Visualizes data exposed by the API server.
 - [Riot API Crawler](https://github.com/michaelmdresser/teemo-tool-data): Gathers data for attempts at predicting outcome of Salty Teemo matches.
 - [Match Prediction Models](https://github.com/michaelmdresser/teemo-tool-predict): Uses the data from the Riot API Crawler to build models aimed at predicting the outcome of Salty Teemo matches.
 
