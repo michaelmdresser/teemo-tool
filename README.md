@@ -1,6 +1,11 @@
 # teemo-tool
 
-Teemo Tool is a project intended to help bettors on the [Salty Teemo](https://www.twitch.tv/saltyteemo) stream make more informed betting decisions. This project consists of several components:
+Teemo Tool is a project intended to help bettors on the [Salty Teemo](https://www.twitch.tv/saltyteemo) stream make more informed betting decisions. 
+
+:warning: To avoid dealing with hosting and domain name costs, I've made a [fully browser-side version of Teemo Tool](https://github.com/michaelmdresser/teemo-tool-site-standalone) which you can visit [here](https://michaeldresser.io/teemo-tool-site-standalone/). While lacking in UX (bets have to be tracked and managed locally) its more reliably available (thanks, GitHub Pages!)	:warning:	
+
+
+This project consists of several components:
 
 ### Project Repositories
 
